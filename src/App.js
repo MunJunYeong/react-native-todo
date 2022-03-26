@@ -59,10 +59,12 @@ export default function App(){
         currentTasks[item.id] = item;
         setTasks(currentTasks);
     }
-
     const _handleTextChange = text => {
         setNewTask(text);
     };
+    const _onBlur = ()=>{
+        setNewTask('');
+    }
     
     const width = Dimensions.get('window').width;
     return (
@@ -77,6 +79,7 @@ export default function App(){
                     value = {newTask}
                     onChangeText = {_handleTextChange}
                     onSubmitEditing = {_addTask}
+                    onBlur =  {_onBlur}
                 />
                 <List  width={width}>
                     {Object.values(tasks)

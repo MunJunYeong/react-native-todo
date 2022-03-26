@@ -16,7 +16,7 @@ const StyledInput = styled.TextInput.attrs( ({theme}) => ({
     
 `;
 
-const Input = ({placeholder, value, onChangeText, onSubmitEditing})=>{
+const Input = ({placeholder, value, onChangeText, onSubmitEditing, onBlur})=>{
     const width = Dimensions.get('window').width;
     return <StyledInput width={width} placeholder={placeholder} maxLength={50}
         autoCapitalize="none" //자동 대문자 비활성화
@@ -26,6 +26,7 @@ const Input = ({placeholder, value, onChangeText, onSubmitEditing})=>{
         value = {value}
         onChangeText = {onChangeText}
         onSubmitEditing = {onSubmitEditing}
+        onBlur  = {onBlur}
     />
 }
 
@@ -34,6 +35,7 @@ Input.protoTypes = {
     value : ProtoTypes.string.isRequired,
     onChangeText : ProtoTypes.func.isRequired,
     onSubmitEditing : ProtoTypes.func.isRequired,
+    onBlur : ProtoTypes.func.isRequired,
 }
 
 export default Input;
