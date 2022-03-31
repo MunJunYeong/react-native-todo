@@ -112,7 +112,9 @@ export default function App(){
                         ))
                     }
                 </List>
-                <DeleteButton />
+                <DeleteButton
+                    onPress={() => setTasks({})}
+                />
             </Container>
         </ThemeProvider>
     ) 
