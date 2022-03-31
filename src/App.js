@@ -6,9 +6,11 @@ import Input from './components/Input';
 // import {images} from './images';
 // import IconButton from './components/IconButton';
 import Task from './components/Task';
+import DeleteButton from './components/DeleteButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { AppLoading } from 'expo';
+// import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading'
 
 // SafeAreaView : 아이폰 노치 디자인 고려한 View
 const Container = styled.SafeAreaView` 
@@ -33,7 +35,7 @@ export default function App(){
     const width = Dimensions.get('window').width;
     const [newTask, setNewTask] = useState('');
     const [tasks, setTasks] = useState({});
-    // const[isReady, setIsReady] = useState(false);
+    const[isReady, setIsReady] = useState(false);
 
     const _saveTasks = async tasks => {
         try{
@@ -81,12 +83,10 @@ export default function App(){
     }
     
     
-    return (
+    return isReady ? (
         <ThemeProvider theme={theme} >
+            <AppLoading />
             <Container>
-                <AppLoading>
-
-                </AppLoading>
                 <StatusBar barStyle='light-content' backgroundColor={theme.background} >
 
                 </StatusBar>
@@ -112,7 +112,15 @@ export default function App(){
                         ))
                     }
                 </List>
+                <DeleteButton />
             </Container>
         </ThemeProvider>
+    ) 
+    : (
+        <AppLoading
+        startAsync={_loadTasks}
+        onFinish = { () => setIsReady(true)}
+        onError = {console.error}
+        />
     )
 }
